@@ -1,6 +1,7 @@
+//CHANGED 6:21 pm
 import { ObjectId } from "bson";
 
-class Task {
+class ShiftLog {
   /**
    *
    * @param {string} name The name of the task
@@ -8,29 +9,39 @@ class Task {
    * @param {ObjectId} id The ObjectId to create this task with
    */
   constructor({
-    name,
+    email,
+    date,
+    timeIn,
+    timeOut,
+    lateStatus,
+    absenceStatus,
     partition,
-    status = Task.STATUS_OPEN,
     id = new ObjectId(),
   }) {
+    //this.name = name;
+    this.email = email;
+    this.date = date;
+    this.timeIn = timeIn;
+    this.timeOut = timeOut;
+    this.lateStatus = lateStatus;
+    this.absenceStatus = absenceStatus;
     this._partition = partition;
     this._id = id;
-    this.name = name;
-    this.status = status;
   }
 
-  static STATUS_OPEN = "Open";
-  static STATUS_IN_PROGRESS = "InProgress";
-  static STATUS_COMPLETE = "Complete";
   static schema = {
-    name: "Task",
+    name: "Shift",
     properties: {
       _id: "objectId",
-      name: "string",
-      status: "string",
+      email: "string",
+      date: "string",
+      timeIn: "string",
+      timeOut: "string",
+      lateStatus: "string",
+      absenceStatus: "string",
     },
     primaryKey: "_id",
   };
 }
 
-export { Task };
+export { ShiftLog };
